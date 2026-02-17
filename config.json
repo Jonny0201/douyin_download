@@ -1,0 +1,43 @@
+{
+    "predefined" : {
+        "url_prefix" : "https://www.douyin.com/user/self?from_tab_name=main&showTab=",
+        "my_page" : "https://www.douyin.com/user/self?from_tab_name=main&showTab=post",
+        "number_of_media_tag" : "LyfMkF7f",
+        "image_tag" : "rbb7x4Wi",
+        "live_photo_tag" : "cqVXdjMe",
+        "following_user_tag" : "i5U4dMnB",
+        "user_avatar_tag" : "uz1VJwFY",
+        "following_tag" : "uvGnYXqn",
+        "scroll_to_bottom_tip" : "暂时没有更多了",
+        "error_page_tag" : "IODnWoHY",
+        "login_tag" : "r2P1NdJa",
+        "no_posts_tag" : "uo6lDF4D",
+        "server_exception_tip" : "服务异常"
+    },
+    "path" : {
+        "basic" : "",
+        "download_records" : "download_records",
+        "download_path" : "download",
+        "cookies" : "selenium_data",
+        "tmp" : "tmp",
+        "following_users" : "following_users",
+        "url" : "url",
+        "exceptional_url" : "exceptional_url"
+    },
+    "page" : {
+        "favorite_collection" : true,
+        "like" : true,
+        "record" : false,
+        "watch_later" : false
+    },
+    "pull_new_following" : true,
+    "scroll" : {
+        "stop_times" : 0,
+        "manually_check" : false,
+        "stop_while_meeting_exists" : false
+    },
+    "last_download_request_throws" : false,
+    "specific_pages" : [
+
+    ]
+}

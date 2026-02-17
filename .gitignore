@@ -205,3 +205,19 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Jetbrains
+.idea/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# douyin_download Project
+download/
+selenium_data/
+tmp/
+download_records
+exceptional_url
+following_users
+url
