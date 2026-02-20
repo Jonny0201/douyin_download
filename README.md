@@ -46,9 +46,9 @@
 
 如果你只想下载某一个页面的作品（例如某个用户主页，或者你自己点过赞的页面），可以按以下方式操作：
 
-1. 直接把目标页面的 URL 填写到 `config.json` 里的 `specific_pages` 数组中，或者写入 `path.url` 对应的文件中（每行一个 URL）。
+1. 直接把目标页面的 URL 填写到 `config.json` 里的 `specific_pages` 数组中，或者写入 `config.url` 对应的文件中（每行一个 URL）。
 2. 如果你不确定页面里一共有多少作品，也可以先运行 `python get_posts.py`，先把该页面中的所有作品链接拉取出来，确认无误后再用于下载。
-3. 运行 `python download.py`，程序会只针对这些页面进行滚动和抓取，并把作品下载到 `path.download_path` 指定的目录中。
+3. 运行 `python download.py`，程序会只针对这些页面进行滚动和抓取，并把作品下载到 `config.download_path` 指定的目录中。
 
 这样就可以只针对你关心的某一个（或几个）页面进行下载，而不需要拉取关注列表或其它页面。
 
@@ -62,38 +62,39 @@
 ## 通用配置说明
 
 - 所有工具都会读取 `config.json`.
-- `path.basic` 为空时, 默认使用脚本所在目录.
-- `path.download_records` 用于去重, 已下载页面不会重复下载.
+- `config.basic` 为空时, 默认使用脚本所在目录.
+- `config.download_records` 用于去重, 已下载页面不会重复下载.
 - `page.*` 用于控制是否抓取对应页面.
 - `specific_pages` 用于添加自定义页面, 例如其它用户喜欢和收藏等.
 
 ## download.py: 下载作品
 
-用途: 根据 `path.url` 或 `specific_pages` 中的页面地址, 下载对应页面内的作品资源.
+用途: 根据 `config.url` 或 `specific_pages` 中的页面地址, 下载对应页面内的作品资源.
 
 使用步骤:
 
-1. 在 `config.json` 中配置 `path.basic` 与下载相关路径.
-2. 将需要下载的页面地址写入 `path.url` 对应的文件, 或填写到 `specific_pages` 数组.
-3. 运行: `python download.py`.
-4. 程序会自动滚动页面并抓取作品, 下载结果保存到 `path.download_path`.
-5. 已处理过的页面会记录到 `path.download_records`, 避免重复下载.
+1. 在 `config.json` 中配置 `config.basic` 与下载相关路径.
+2. 将需要下载的页面地址写入 `config.url` 对应的文件, 或填写到 `specific_pages` 数组.
+3. 如果 `config.pull_new_following` 为 `true`, 那么会直接拉取你帐号的关注列表.
+4. 运行: `python download.py`.
+5. 程序会自动滚动 `config.following_users` 中的所有页面 (包含刚刚拉取的关注博主页面), 链接保存到 `config.url`, 下载结果保存到 `config.download_path`.
+6. 已处理过的页面会记录到 `config.download_records`, 当全部作品下载成功后, `path.url` 这个文件会清空, 避免重复下载.
 
 注意:
 
 - 支持视频, 图片, Live Photo, 具体以页面实际返回为准.
-- 下载过程中会使用 `path.tmp` 作为临时目录, 完成后会清理.
+- 下载过程中会使用 `config.tmp` 作为临时目录, 完成后会清理.
 
 ## get_following.py: 拉取关注列表
 
-用途: 拉取当前账号的关注用户列表, 并保存到 `path.following_users`.
+用途: 拉取当前账号的关注用户列表, 并保存到 `config.following_users`.
 
 使用步骤:
 
 1. 确保已在浏览器中登录抖音.
 2. 运行: `python get_folowing.py`.
 3. 程序会自动滚动关注列表页面, 直到不再增长或需要人工确认.
-4. 最终结果会按行写入 `path.following_users` 文件.
+4. 最终结果会按行写入 `config.following_users` 文件.
 
 注意:
 
