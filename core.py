@@ -222,8 +222,8 @@ def download(driver, configure, url_list) :
                 download_records.flush()
             elif case == "save to exceptional list" :
                 if (len(driver.find_elements(By.CLASS_NAME, configure["predefined"]["error_page_tag"])) > 0 or
-                        driver.current_url.startswith("https://www.douyin.com/video/") or
-                        driver.current_url.startswith("https://www.douyin.com/note/")) :
+                        (not driver.current_url.startswith("https://www.douyin.com/video/") and
+                        not driver.current_url.startswith("https://www.douyin.com/note/"))) :
                     downloaded.add(url)
                     download_records.write(url + '\n')
                     download_records.flush()
