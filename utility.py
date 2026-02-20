@@ -39,7 +39,7 @@ def get_chrome(configure) :
 def normalize_url(url) :
     result = re.search(r'^(https?://[^/]+/(?:video|note)/\d+)', url)
     return result.group(1) if result else ""
-def request(url, *, timeout = (10, 3600), retries = 3, backoff_s = 1.0) :
+def request(url, *, timeout = (10, 3600), retries = 3, backoff_s = 1.0, proxy = {}) :
     headers = {
         'Connection': 'keep-alive',
         'sec-ch-ua': '"Not A;Brand";v="99", "Chromium";v="145", "Google Chrome";v="145"',
@@ -57,10 +57,11 @@ def request(url, *, timeout = (10, 3600), retries = 3, backoff_s = 1.0) :
     }
     s = requests.Session()
     s.trust_env = False
+    s.proxies = proxy
     last_exc = None
     for attempt in range(max(1, int(retries))) :
         try :
-            resp = s.get(url, headers = headers, verify = False, timeout = timeout, stream = True)
+            resp = s.get(url, headers = headers, verify = False, timeout = timeout, stream = True, proxies = proxy)
             return resp
         except (ReadTimeout, ConnectionError, ChunkedEncodingError) as e :
             last_exc = e
